@@ -13,13 +13,5 @@ if [ ! -f "$logfile" ]; then
 fi
 
 awk '{
-	ip = $1
-	status = $9
-	key = ip " " status
-	count[key]++
-}
-END{
-	for (key in count) {
-		print count[key], key
-	}
-}' "$logfile" | sort -nr
+	print $1, $9
+}' "$logfile" | sort | uniq -c | sort -rn
