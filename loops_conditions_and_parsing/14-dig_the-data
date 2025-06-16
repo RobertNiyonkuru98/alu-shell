@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Using awk to group visitors by IP and HTTP status code, displaying occurrence counts sorted from highest to lowest
 logfile="$1"
-awk '{
+awk 'NF >=9 && $1 ~ /^[0-9]+\.[0-9]+\.[0-9]{
 	print $1, $9
 }' "$logfile" | sort | uniq -c | sort -rn
