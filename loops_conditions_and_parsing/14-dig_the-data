@@ -1,17 +1,3 @@
 #!/usr/bin/env bash
 # Using awk to group visitors by IP and HTTP status code, displaying occurrence counts sorted from highest to lowest
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <logfile>"
-    exit 1
-fi
-
-logfile="$1"
-
-# Check if file exists
-if [ ! -f "$logfile" ]; then
-    echo "Error: File '$logfile' not found"
-    exit 1
-fi
-awk 'NF >=9 && $1 ~ /^[0-9]+\.[0-9]+\.[0-9]{
-	print $1, $9
-}' "$logfile" | sort | uniq -c | sort -rn
+awk '{print $1 " " $9}' apache-access.log | sort | uniq -c | sort -rn
