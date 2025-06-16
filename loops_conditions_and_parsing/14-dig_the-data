@@ -1,17 +1,5 @@
 #!/usr/bin/env bash
 # Using awk to group visitors by IP and HTTP status code, displaying occurrence counts sorted from highest to lowest
-if [ $# -eq 0 ]; then
-	echo "Usage: $0 <logfile>"
-	exit 1
-fi
-
-logfile="$1"
-
-if [ ! -f "$logfile" ]; then
-	echo "Error: File '$logfile' not found"
-	exit 1
-fi
-
 awk '{
 	print $1, $9
 }' "$logfile" | sort | uniq -c | sort -rn
